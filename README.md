@@ -1,5 +1,5 @@
 # IP2Proxy Filter Plugin
-This is IP2Proxy filter plugin for Logstash that enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots, data center ranges and residential proxies using IP2Proxy BIN database. Other information available includes proxy type, country, state, city, ISP, domain name, usage type, AS number, AS name, threats, last seen date and provider names. The library took the proxy IP address from **IP2Proxy BIN Data** file.
+This is IP2Proxy filter plugin for Logstash that enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots, data center ranges, residential proxies, consumer privacy networks, and enterprise private networks using IP2Proxy BIN database. Other information available includes proxy type, country, state, city, ISP, domain name, usage type, AS number, AS name, threats, last seen date and provider names. The library took the proxy IP address from **IP2Proxy BIN Data** file.
 
 For the methods to use IP2Proxy filter plugin with Elastic Stack (Elasticsearch, Filebeat, Logstash, and Kibana), please take a look on this [tutorial](https://blog.ip2location.com/knowledge-base/how-to-use-ip2proxy-filter-plugin-with-elastic-stack).
 

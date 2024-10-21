@@ -1,5 +1,5 @@
 # IP2Proxy Filter Plugin
-This is IP2Proxy filter plugin for Logstash that enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots, data center ranges, residential proxies, consumer privacy networks, and enterprise private networks using IP2Proxy BIN database. Other information available includes proxy type, country, state, city, ISP, domain name, usage type, AS number, AS name, threats, last seen date and provider names. The library took the proxy IP address from **IP2Proxy BIN Data** file.
+This is IP2Proxy filter plugin for Logstash that enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots, data center ranges, residential proxies, consumer privacy networks, and enterprise private networks using IP2Proxy BIN database. Other information available includes proxy type, country, state, city, ISP, domain name, usage type, AS number, AS name, threats, last seen date and provider names. The library took the proxy IP address from **IP2Proxy BIN Data** file and **IP2Location.io** data.
 
 For the methods to use IP2Proxy filter plugin with Elastic Stack (Elasticsearch, Filebeat, Logstash, and Kibana), please take a look on this [tutorial](https://blog.ip2location.com/knowledge-base/how-to-use-ip2proxy-filter-plugin-with-elastic-stack).
 
@@ -10,6 +10,9 @@ For the methods to use IP2Proxy filter plugin with Elastic Stack (Elasticsearch,
 This plugin requires IP2Proxy BIN data file to function. You may download the BIN data file at
 * IP2Proxy LITE BIN Data (Free): https://lite.ip2location.com
 * IP2Proxy Commercial BIN Data (Commercial): https://www.ip2location.com
+
+## Dependencies (IP2LOCATION.IO DATA)
+This plugin requires API key to function. You may sign up for a free API key at https://www.ip2location.io/pricing.
 
 
 ## Installation
@@ -32,7 +35,33 @@ filter {
     match => { "message" => "%{COMBINEDAPACHELOG}"}
   }
   ip2proxy {
-    source => "clientip"
+    source => "[source][address]"
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => [ "localhost:9200" ]
+  }
+}
+```
+
+## Config File Example using IP2Location.io
+```
+input {
+  beats {
+    port => "5043"
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{COMBINEDAPACHELOG}"}
+  }
+  ip2proxy {
+    source => "[source][address]"
+    lookup_type => "ws"
+    api_key => "YOUR_API_KEY"
   }
 }
 
@@ -51,12 +80,16 @@ output {
 |database|a valid filesystem path|No|
 |use_memory_mapped|boolean|No|
 |use_cache|boolean|No|
+|lookup_type|string|No|
+|api_key|string|No|
 |hide_unsupported_fields|boolean|No|
 
 * **source** field is a required setting that containing the IP address or hostname to get the ip information.
 * **database** field is an optional setting that containing the path to the IP2Proxy BIN database file.
 * **use_memory_mapped** field is an optional setting that used to allow user to enable the use of memory mapped file. Default value is false.
 * **use_cache** field is an optional setting that used to allow user to enable the use of cache. Default value is true.
+* **lookup_type** field is an optional setting that used to allow user to decide the lookup method either using IP2Proxy BIN database file(db) or IP2Location.io data(ws). Default value is db.
+* **api_key** field is an optional setting that used to allow user to set the API Key of the IP2Location.io lookup.
 * **hide_unsupported_fields** field is an optional setting that used to allow user to hide unsupported fields. Default value is false.
 
 

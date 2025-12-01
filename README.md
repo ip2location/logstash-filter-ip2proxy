@@ -3,7 +3,7 @@ This is IP2Proxy filter plugin for Logstash that enables Logstash's users to rev
 
 For the methods to use IP2Proxy filter plugin with Elastic Stack (Elasticsearch, Filebeat, Logstash, and Kibana), please take a look on this [tutorial](https://blog.ip2location.com/knowledge-base/how-to-use-ip2proxy-filter-plugin-with-elastic-stack).
 
-*Note: This plugin works in Logstash 7 and Logstash 8.*
+*Note: This plugin works in Logstash 7, 8 and 9*
 
 
 ## Dependencies (IP2PROXY BIN DATA FILE)
@@ -102,6 +102,7 @@ output {
 |ip2proxy.country_long|the ISO3166-1 country name of the proxy|
 |ip2proxy.country_short|the ISO3166-1 country code (two-characters) of the proxy|
 |ip2proxy.domain|the domain name of proxy's IP address or domain name|
+|ip2proxy.fraud_score|the potential risk score (0 - 99) associated with IP address. A higher IP2Proxy Fraud Score indicates a greater likelihood of fraudulent activity and a lower reputation|
 |ip2proxy.is_proxy|Check whether if an IP address was a proxy. Returned value:<ul><li>-1 : errors</li><li>0 : not a proxy</li><li>1 : a proxy</li><li>2 : a data center IP address</li></ul>|
 |ip2proxy.isp|the ISP name of the proxy|
 |ip2proxy.last_seen|the last seen days ago value of proxy's IP address or domain name|

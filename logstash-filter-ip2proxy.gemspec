@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name            = 'logstash-filter-ip2proxy'
-  s.version         = '2.4.0'
+  s.version         = '2.5.0'
   s.licenses        = ['Apache-2.0']
   s.summary         = "Logstash filter IP2Proxy"
   s.description     = "IP2Proxy filter plugin for Logstash enables Logstash's users to reverse search of IP address to detect VPN servers, open proxies, web proxies, Tor exit nodes, search engine robots, data center ranges and residential proxies using IP2Proxy BIN database."
